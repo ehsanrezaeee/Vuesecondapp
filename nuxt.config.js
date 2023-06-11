@@ -40,10 +40,24 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/fontawesome',
     '@nuxtjs/composition-api/module',
     ['@pinia/nuxt', { disableVuex: true }],
   ],
 
+  googleFonts: {
+    families: {
+      Roboto: true,
+      Vazirmatn: true,
+      Harmattan: true,
+    },
+  },
+  fontawesome: {
+    icons: {
+      solid: ['faShoppingCart'],
+    },
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios

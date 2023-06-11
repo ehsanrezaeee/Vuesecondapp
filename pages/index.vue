@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="{ fontFamily: 'Harmattan' }">
     <NavBar />
     <DataList />
   </div>
