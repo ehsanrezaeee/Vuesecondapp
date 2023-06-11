@@ -1,6 +1,15 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center align-items-center gap-4">
+    <div
+      v-if="loading"
+      class="container d-flex align-items-center justify-content-center"
+    >
+      <h2>
+        لطفا صبور باشید . دیتا در حال دریافت است. اگر بیش از 10 ثانیه طول کشید
+        دوباره رفرش کنید
+      </h2>
+    </div>
+    <div v-else class="row justify-content-center align-items-center gap-4">
       <div
         v-for="(product, index) in paginatedProducts"
         :key="'product-' + index"
@@ -15,7 +24,7 @@
           <h1 class="text-lg">{{ product.attributes.name }}</h1>
           <p class="text-md">{{ product.attributes.price }} $</p>
           <button
-            class="bg-blue-500 text-white px-2 py-1 rounded-sm mt-2 mb-2 hover:bg-blue-200 active:bg-green-300"
+            class="bg-blue-500 text-white px-2 py-1 rounded-sm mt-2 mb-2 hover:bg-blue-300 active:bg-green-300"
             @click="addToCart(product)"
           >
             افزودن به سبد
@@ -70,6 +79,8 @@ export default class ProductList extends Vue {
     amount: 0,
   }
 
+  loading: boolean = true
+
   get paginatedProducts() {
     const startIndex = (this.page - 1) * this.pageSize
     const endIndex = startIndex + this.pageSize
@@ -79,6 +90,7 @@ export default class ProductList extends Vue {
   async fetchData() {
     const response = await axios.get('/api/products')
     this.products = response.data.data
+    this.loading = false
   }
 
   handlePageChange(value: number) {
